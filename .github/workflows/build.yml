@@ -8,10 +8,16 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+    
     - name: Compile
-      run: clang -dynamiclib -arch arm64 -o BGMI_Hack.dylib my_bgmi_hack.c
+      run: |
+        clang -dynamiclib -arch arm64 -o BGMI_Hack.dylib my_bgmi_hack.c
+        ls -la BGMI_Hack.dylib
+    
     - name: Upload
       uses: actions/upload-artifact@v4
       with:

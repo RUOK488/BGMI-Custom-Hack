@@ -1,0 +1,19 @@
+name: Build BGMI Hack
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Compile
+      run: clang -dynamiclib -arch arm64 -o BGMI_Hack.dylib my_bgmi_hack.c
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: BGMI_Hack
+        path: BGMI_Hack.dylib
